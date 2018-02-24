@@ -57,29 +57,30 @@ def propose(x_id): # x_id and y_id represent their names/#'s/ids.
 
     
     # First check X's first preference.
-    y_id = x_participants[x_id][1]
-    print("X_PREFERENCE:")
-    print(y_id)
+    y_id = x_participants[x_id][2] # does not start at 0, 1 is X's id, so 2 is first interest.
+    #print("X_PREFERENCE:")
+    #print(y_id)
 
     # See if X's first preference is available.
     try:
-        if paired[y_id]: # IF TAKEN ....
-            # If X's first preference is paired elsewhere, see if Y would
-            # prefer X over their current partner.
-            for i in y_participants[y_id]: # iterate over Y's preferences
-                if i == x_id: # if X comes up first, pair Y with X instead...
-                    remaining_x_pool.append(paired[y_id])
-                    # send Y's current partner back to the pool.
-                    
-                    paired[y_id] = x_participants[x_id] # pair X list with Y.
-                    remaining_x_pool.pop(0) # remove this suitor from the pool.
-                    
-                    
-        else: # IF FREE/AVAILABLE...
-            paired[y_id] = x_id # simple. Pair X and Y.
-            remaining_x_pool.pop(0)# remove x from the pool.
+        something = paired[y_id] # IF TAKEN ....
+        # If X's first preference is paired elsewhere, see if Y would
+        # prefer X over their current partner.
+        for i in y_participants[y_id]: # iterate over Y's preferences
+            if i == x_id: # if X comes up first, pair Y with X instead...
+                remaining_x_pool.append(paired[y_id])
+                # send Y's current partner back to the pool.
+                paired[y_id] = x_participants[x_id] # pair X list with Y.
+                remaining_x_pool.pop(0) # remove this suitor from the pool.
+                print("X USURPS ANOTHER GUY!")
+        return                
+    # IF FREE/AVAILABLE...
     except:
-        pass
+        paired[y_id] = x_id # simple. Pair X and Y.
+        remaining_x_pool.pop(0)# remove x from the pool.
+        print("X PAIRS WITH UNMATCHED Y!")
+        return
+
     
 
 for i in range(0, int(num_participants/2)):
@@ -87,21 +88,7 @@ for i in range(0, int(num_participants/2)):
     y_participants[i] = makeParticipantYInterests( num_participants )
 
     
-print("X Participant 0:")
-print(x_participants[0])
-print("X Participant 1:")
-print(x_participants[1])
-print("X Participant 5:")
-print(x_participants[4])
 
-print("Y Participant 0:")
-print(y_participants[0])
-print("Y Participant 1:")
-print(y_participants[1])
-print("Y Participant 5:")
-print(y_participants[4])
-
-print("START PROPOSALS!")
 
 # initialize remaining X participants into pool
 index = 0 # first individual gets ID 0.
@@ -110,8 +97,21 @@ for x in x_participants:
     remaining_x_pool.append(x) # add this suitor to the pool.
     index += 1  # increase this counter, so we keep everyone labeled.
 
-for x in remaining_x_pool: # go through each suitor in the pool
-    print("proposing")
-    print(x)
-    propose(x)
+print("X's (first value is x id, rest is their preferences in descending order)")
+for x in x_participants:
+    print(x_participants[x])
+
+print("Y's, in order of descending preference for X's)")
+for y in y_participants:
+      print(y_participants[y])
+    
+
+
+print("START PROPOSALS!")
+
+
+while len(remaining_x_pool) > 0:
+    for x in remaining_x_pool: # go through each suitor in the pool
+        #print(x)
+        propose(x)
     
