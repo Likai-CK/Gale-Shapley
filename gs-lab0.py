@@ -7,9 +7,10 @@
 # EXAMPLE: ./gs-lab0.py 25
 #
 
+import sys
 import time
 import numpy
-num_participants = 500
+num_participants = sys.argv[1]
 # Even numbers only!
 # This number represents suitors + girls. Half represents suits, half
 # represents girls.
@@ -21,7 +22,7 @@ x_participants = {} # these will keep a record of everyone's id / interests
 y_participants = {} # theres will keep a record of everyone's id / interests.
 
 remaining_x_pool = {} # remaining suitors will go here.
-paired = {}
+paired = {} # complete pairs go here.
 
 index = 0
 
