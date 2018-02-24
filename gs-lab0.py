@@ -83,6 +83,7 @@ def propose(x_id): # x_id and y_id represent their names/#'s/ids.
         paired[y_id] = x_id # simple. Pair X and Y.
         del remaining_x_pool[x_id]
         print(str(x_id) + " PAIRS WITH UNMATCHED " + str(y_id))
+        print(remaining_x_pool)
         return
 
     
