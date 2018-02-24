@@ -61,23 +61,26 @@ def propose(x_id): # x_id and y_id represent their names/#'s/ids.
 
     
     # First check X's first preference.
-    y_id = x_participants[x_id][2] # does not start at 0, 1 is X's id, so 2 is first interest.
+    y_id = x_participants[x_id][0]
     #print("X_PREFERENCE:")
     #print(y_id)
 
     # See if X's first preference is available.
 
     if y_id in paired: # IF TAKEN ....
+        
         # If X's first preference is paired elsewhere, see if Y would
         # prefer X over their current partner.
-        for i in y_participants.get(y_id, ''): # iterate over Y's preferences
-            if i == x_id: # if X comes up first, pair Y with X instead...
-                remaining_x_pool.append(paired[y_id])
-                # send Y's current partner back to the pool.
-                paired[y_id] = x_participants[x_id] # pair X list with Y.
+
+        # IF Y Prefers this new X over their current partner, switch!
+        for y in y_participants:
+                
+                remaining_x_pool[paired[y_id]] = x_participants[paired[y_id]] # send Y's current partner back to the pool.
+                print(str(x_id) + " USURPS " + str(paired[y_id]))
+                paired[y_id] = x_id # pair X list with Y.
                 del remaining_x_pool[x_id] # remove from participant pool
-                print("X USURPS ANOTHER GUY!")
-        return                
+                return
+         
            
     else:  # IF FREE/AVAILABLE...
         paired[y_id] = x_id # simple. Pair X and Y.
@@ -125,3 +128,5 @@ while len(remaining_x_pool) > 0:
 print("HERE ARE THE MATCHES:")
 for k, v in paired.items():
     print(k, v)
+
+print(remaining_x_pool)
