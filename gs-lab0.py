@@ -57,7 +57,7 @@ def propose(x_id): # x_id and y_id represent their names/#'s/ids.
 
     
     # First check X's first preference.
-    y_id = x_participants[x_id][0]
+    y_id = x_participants[x_id][1]
     print("X_PREFERENCE:")
     print(y_id)
 
@@ -104,8 +104,8 @@ print(y_participants[4])
 print("START PROPOSALS!")
 
 # initialize remaining X participants into pool
+index = 0 # first individual gets ID 0.
 for x in x_participants:
-    index = 0 # first individual gets ID 0.
     x_participants[x].insert(0,index) # add a label to make sure we keep track of the suitors.
     remaining_x_pool.append(x) # add this suitor to the pool.
     index += 1  # increase this counter, so we keep everyone labeled.
