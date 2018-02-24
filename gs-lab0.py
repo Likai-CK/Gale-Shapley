@@ -66,23 +66,23 @@ def propose(x_id): # x_id and y_id represent their names/#'s/ids.
     #print(y_id)
 
     # See if X's first preference is available.
-    try:
-        something = paired[y_id] # IF TAKEN ....
+
+    if y_id in paired: # IF TAKEN ....
         # If X's first preference is paired elsewhere, see if Y would
         # prefer X over their current partner.
-        for i in y_participants[y_id]: # iterate over Y's preferences
+        for i in y_participants.get(y_id, ''): # iterate over Y's preferences
             if i == x_id: # if X comes up first, pair Y with X instead...
                 remaining_x_pool.append(paired[y_id])
                 # send Y's current partner back to the pool.
                 paired[y_id] = x_participants[x_id] # pair X list with Y.
-                remaining_x_pool.pop(0) # remove this suitor from the pool.
+                del remaining_x_pool[x_id] # remove from participant pool
                 print("X USURPS ANOTHER GUY!")
         return                
-    # IF FREE/AVAILABLE...
-    except:
+           
+    else:  # IF FREE/AVAILABLE...
         paired[y_id] = x_id # simple. Pair X and Y.
-        remaining_x_pool.pop(0)# remove x from the pool.
-        print("X PAIRS WITH UNMATCHED Y!")
+        del remaining_x_pool[x_id]
+        print(str(x_id) + " PAIRS WITH UNMATCHED " + str(y_id))
         return
 
     
@@ -102,23 +102,24 @@ for x in x_participants:
     index += 1
 
 print("X's (first value is x id, rest is their preferences in descending order)")
-for x in remaining_x_pool:
-    print(remaining_x_pool)
+print(remaining_x_pool)
 
 print("Y's, in order of descending preference for X's)")
 for y in y_participants:
       print(y_participants[y])
     
-#print(remaining_x_pool[2])
-
+print("TESTING X:")
+print(remaining_x_pool[0])
+print(remaining_x_pool[1])
+print(remaining_x_pool[2])
+print(remaining_x_pool[3])
+print(remaining_x_pool[4])
 print("START PROPOSALS!")
 
 
 while len(remaining_x_pool) > 0:
-    for x in remaining_x_pool: # go through each suitor in the pool
-        #print(x)
-        propose(x)
-
+    #print(next(iter(remaining_x_pool)))
+    propose(next(iter(remaining_x_pool)))
 
 print("HERE ARE THE MATCHES:")
 for k, v in paired.items():
