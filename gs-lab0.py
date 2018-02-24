@@ -12,27 +12,11 @@ paired = {}
 index = 0
 # Kneuth Shuffle
 def kneuthShuffle( ls ):
-    #copy = ls
-    index = 0
-    temp = 0
-    
-    for i in ls:
-        index += 1
-        shuffle_or_no = numpy.random.randint(0,2)
-        print("shuffleorno:")
-        print(shuffle_or_no)
-        if (shuffle_or_no >= 1) and (index != len(ls)-1) :
-            rand = numpy.random.randint(index,len(ls)-1)
-            print("rand:")
-            print(rand)
-            temp = i
-            i = rand
-            ls[rand] = temp          
-        else:
-            continue
-    print("COPY:")
-    print(ls)
+    for i in range(len(ls)):
+        j = numpy.random.randint(0,len(ls)-1)
+        ls[j], ls[i] = ls[i], ls[j]
     return ls
+        
 
                                     
 # X can only be interested in the #'s representing the Y Participants,
