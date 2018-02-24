@@ -1,7 +1,11 @@
-# # # # # # # # # # # 
-# Christopher Kelly #
-# Spring 2018       #
-# # # # # # # # # # #
+# # # # # # # # # # # # # # # # # # # # # # # #
+# Gale - Shapley Algorithm
+# Christopher Kelly 
+# Spring 2018       
+# INPUT: Amount of Participants
+# OUTPUT: A Stable-Matched Set of X-Y pairs
+# EXAMPLE: ./gs-lab0.py 25
+#
 
 import numpy
 num_participants = 10
@@ -51,7 +55,7 @@ def makeParticipantYInterests( n ):
     return interests
 
 
-# Propose function
+# Propose function - needs work
 def propose(x_id): # x_id and y_id represent their names/#'s/ids.
     # THE FIRST ELEMENT IS X_ID, NOT X'S PREFERENCE.
 
@@ -85,6 +89,7 @@ def propose(x_id): # x_id and y_id represent their names/#'s/ids.
 
 for i in range(0, int(num_participants/2)):
     x_participants[i] = makeParticipantXInterests( num_participants )
+   # x_participants[i].insert(0,i) # add a label to make sure we keep track of the suitors.
     y_participants[i] = makeParticipantYInterests( num_participants )
 
     
@@ -93,13 +98,12 @@ for i in range(0, int(num_participants/2)):
 # initialize remaining X participants into pool
 index = 0 # first individual gets ID 0.
 for x in x_participants:
-    x_participants[x].insert(0,index) # add a label to make sure we keep track of the suitors.
-    remaining_x_pool.append(x) # add this suitor to the pool.
-    index += 1  # increase this counter, so we keep everyone labeled.
+    remaining_x_pool[index] =  x_participants[x]
+    index += 1
 
 print("X's (first value is x id, rest is their preferences in descending order)")
-for x in x_participants:
-    print(x_participants[x])
+for x in remaining_x_pool:
+    print(remaining_x_pool)
 
 print("Y's, in order of descending preference for X's)")
 for y in y_participants:
@@ -114,4 +118,8 @@ while len(remaining_x_pool) > 0:
     for x in remaining_x_pool: # go through each suitor in the pool
         #print(x)
         propose(x)
-    
+
+
+print("HERE ARE THE MATCHES:")
+for k, v in paired.items():
+    print(k, v)
