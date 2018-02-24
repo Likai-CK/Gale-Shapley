@@ -1,6 +1,13 @@
+# # # # # # # # # # # 
+# Christopher Kelly #
+# Spring 2018       #
+# # # # # # # # # # #
+
 import numpy
 num_participants = 10
 # Even numbers only!
+# This number represents suitors + girls. Half represents suits, half
+# represents girls.
 
 print("Number of participants:")
 print(num_participants)
