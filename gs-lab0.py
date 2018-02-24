@@ -17,11 +17,13 @@ y_participants = {}
 paired = {}
 
 index = 0
+
+
 # Kneuth Shuffle
 def kneuthShuffle( ls ):
     for i in range(len(ls)):
-        j = numpy.random.randint(0,len(ls)-1)
-        ls[j], ls[i] = ls[i], ls[j]
+        j = numpy.random.randint(0,len(ls)-1) # generate a random j index swap
+        ls[j], ls[i] = ls[i], ls[j] # swap between the 2 spots!
     return ls
         
 
@@ -43,7 +45,7 @@ def makeParticipantYInterests( n ):
     for i in range(0, int(n/2)):
         interests.append(i)
 
-        
+    interests = kneuthShuffle(interests)   
     return interests
     
 for i in range(0, int(num_participants/2)):
