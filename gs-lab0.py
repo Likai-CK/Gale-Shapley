@@ -19,7 +19,7 @@ print(num_participants)
 x_participants = {} # these will keep a record of everyone's id / interests
 y_participants = {} # theres will keep a record of everyone's id / interests.
 
-remaining_x_pool = [] # remaining suitors will go here.
+remaining_x_pool = {} # remaining suitors will go here.
 paired = {}
 
 index = 0
@@ -98,7 +98,7 @@ for i in range(0, int(num_participants/2)):
 # initialize remaining X participants into pool
 index = 0 # first individual gets ID 0.
 for x in x_participants:
-    remaining_x_pool[index] =  x_participants[x]
+    remaining_x_pool[index] = x_participants[x] #
     index += 1
 
 print("X's (first value is x id, rest is their preferences in descending order)")
@@ -109,7 +109,7 @@ print("Y's, in order of descending preference for X's)")
 for y in y_participants:
       print(y_participants[y])
     
-
+#print(remaining_x_pool[2])
 
 print("START PROPOSALS!")
 
