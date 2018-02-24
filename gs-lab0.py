@@ -78,6 +78,7 @@ def propose(x_id): # x_id and y_id represent their names/#'s/ids.
                 remaining_x_pool[paired[y_id]] = x_participants[paired[y_id]] # send Y's current partner back to the pool.
                 print(str(x_id) + " USURPS " + str(paired[y_id]))
                 paired[y_id] = x_id # pair X list with Y.
+                remaining_x_pool[x_id].pop(0)
                 del remaining_x_pool[x_id] # remove from participant pool
                 return
          
