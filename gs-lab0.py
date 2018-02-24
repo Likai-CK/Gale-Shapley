@@ -7,8 +7,9 @@
 # EXAMPLE: ./gs-lab0.py 25
 #
 
+import time
 import numpy
-num_participants = 10
+num_participants = 500
 # Even numbers only!
 # This number represents suitors + girls. Half represents suits, half
 # represents girls.
@@ -122,6 +123,8 @@ print(remaining_x_pool[4])
 print("START PROPOSALS!")
 
 
+start= time.time()
+
 while len(remaining_x_pool) > 0:
     #print(next(iter(remaining_x_pool)))
     propose(next(iter(remaining_x_pool)))
@@ -131,3 +134,5 @@ for k, v in paired.items():
     print(k, v)
 
 print(remaining_x_pool)
+end = time.time()
+print (str(end - start) + " seconds.")
